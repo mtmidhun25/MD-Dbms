@@ -1,0 +1,219 @@
+SQL> desc emply
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(10)
+ EMPNAME                                            VARCHAR2(15)
+ DESG                                               VARCHAR2(20)
+ DJOIN                                              DATE
+ SAL                                                NUMBER(15)
+
+SQL> alter table emply modify empname varchar(20);
+
+Table altered.
+
+SQL> desc emply
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(10)
+ EMPNAME                                            VARCHAR2(20)
+ DESG                                               VARCHAR2(20)
+ DJOIN                                              DATE
+ SAL                                                NUMBER(15)
+
+
+
+SQL> desc emply
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(10)
+ EMPNAME                                            VARCHAR2(20)
+ DESG                                               VARCHAR2(20)
+ DJOIN                                              DATE
+ SAL                                                NUMBER(15)
+
+
+SQL> insert into emply values(1001,'Anoop','clerk','10-august-2020',12000);
+
+1 row created.
+
+SQL> insert into emply values(1002,'Sooraj','Accountant','12-february-2021',14000);
+
+1 row created.
+
+SQL> insert into emply values(1003,'Amit','Asst. Manager','18-june-2022',25000);
+
+1 row created.
+
+SQL> insert into emply values(1004,'Deepika','Gen. Manager','22-july-2021',27000);
+
+1 row created.
+
+SQL> insert into emply values(1005,'Madhav','Manager','25-october-2020',30000);
+
+1 row created.
+
+SQL> select * from emply;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                clerk                10-AUG-20      12000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+
+SQL> update emply set desg='Clerk' where empno='1001';
+
+1 row updated.
+
+SQL> select * from emply;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select empname,desg,sal from emply;
+
+EMPNAME              DESG                        SAL
+-------------------- -------------------- ----------
+Anoop                Clerk                     12000
+Sooraj               Accountant                14000
+Amit                 Asst. Manager             25000
+Deepika              Gen. Manager              27000
+Madhav               Manager                   30000
+
+SQL> select * from emply where sal>20000;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+
+SQL> select * from emply where sal<15000 and desg='Clerk';
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+
+SQL> select * from emply where sal between 13000 and 20000;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1002 Sooraj               Accountant           12-FEB-21      14000
+
+SQL> select * from emply where sal not between 10000 and 20000;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply where sal not between 10000 and 28000;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply where sal not between 10000 and 25000;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply where desg in('Manager','Clerk');
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply where desg not in('Manager','Clerk');
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+
+
+SQL> select * from emply where empname like('A%');
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+
+SQL> select * from emply where empname not like('A%');
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+
+SQL> select empno,empname,sal*12 as "Annual Salary" from emply;
+
+     EMPNO EMPNAME              Annual Salary
+---------- -------------------- -------------
+      1001 Anoop                       144000
+      1002 Sooraj                      168000
+      1003 Amit                        300000
+      1004 Deepika                     324000
+      1005 Madhav                      360000
+
+SQL> alter table emply add primary key(empno);
+
+Table altered.
+
+SQL> desc emply;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(10)
+ EMPNAME                                            VARCHAR2(20)
+ DESG                                               VARCHAR2(20)
+ DJOIN                                              DATE
+ SAL                                                NUMBER(15)
+
+SQL> select * from emply;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

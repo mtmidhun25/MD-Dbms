@@ -1,0 +1,299 @@
+SQL> create table studt(studid number(10)not null,studname varchar(30),studage number(2),studcity varchar(30));
+
+Table created.
+
+SQL> alter table studt add dob number(20);
+
+Table altered.
+
+SQL> alter table studt modify dob date;
+
+Table altered.
+
+SQL> desc studt;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDID                                    NOT NULL NUMBER(10)
+ STUDNAME                                           VARCHAR2(30)
+ STUDAGE                                            NUMBER(2)
+ STUDCITY                                           VARCHAR2(30)
+ DOB                                                DATE
+
+SQL> insert into studt values(111,'Anaswara',15,'Kottayam','10-january-2010');
+
+1 row created.
+
+SQL> insert into studt values(112,'Deexit',16,'Pathanamthitta','16-july-2009');
+
+1 row created.
+
+SQL> insert into studt values(112,'Gauri',16,'Pathanamthitta','2-march-2009');
+
+1 row created.
+
+SQL> insert into studt values(114,'Jithin',15,'Calicut','5-october-2010');
+
+1 row created.
+
+SQL> insert into studt values(115,'Sreevidya',15,'Trivandrum','25-november-2011');
+
+1 row created.
+
+
+
+SQL> alter table studt modify studage="15" where studname='Sreevidya');
+alter table studt modify studage="15" where studname='Sreevidya')
+                                *
+ERROR at line 1:
+ORA-00902: invalid datatype
+
+SQL> alter table studt modify Studid="113" where studname='Gauri');
+alter table studt modify Studid="113" where studname='Gauri')
+                               *
+ERROR at line 1:
+ORA-00902: invalid datatype
+
+
+
+SQL> update studt set studage=14 where studname='Sreevidya';
+
+1 row updated.
+
+SQL> select * from studt;
+
+    STUDID STUDNAME                          STUDAGE
+---------- ------------------------------ ----------
+STUDCITY                       DOB
+------------------------------ ---------
+       111 Anaswara                               15
+Kottayam                       10-JAN-10
+
+       112 Deexit                                 16
+Pathanamthitta                 16-JUL-09
+
+       112 Gauri                                  16
+Pathanamthitta                 02-MAR-09
+
+
+    STUDID STUDNAME                          STUDAGE
+---------- ------------------------------ ----------
+STUDCITY                       DOB
+------------------------------ ---------
+       114 Jithin                                 15
+Calicut                        05-OCT-10
+
+       115 Sreevidya                              14
+Trivandrum                     25-NOV-11
+
+
+SQL> update studt set studid=113 where studname='Gauri';
+
+1 row updated.
+
+SQL> desc studt;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDID                                    NOT NULL NUMBER(10)
+ STUDNAME                                           VARCHAR2(30)
+ STUDAGE                                            NUMBER(2)
+ STUDCITY                                           VARCHAR2(30)
+ DOB                                                DATE
+
+SQL> select * from studt;
+
+    STUDID STUDNAME                          STUDAGE
+---------- ------------------------------ ----------
+STUDCITY                       DOB
+------------------------------ ---------
+       111 Anaswara                               15
+Kottayam                       10-JAN-10
+
+       112 Deexit                                 16
+Pathanamthitta                 16-JUL-09
+
+       113 Gauri                                  16
+Pathanamthitta                 02-MAR-09
+
+
+    STUDID STUDNAME                          STUDAGE
+---------- ------------------------------ ----------
+STUDCITY                       DOB
+------------------------------ ---------
+       114 Jithin                                 15
+Calicut                        05-OCT-10
+
+       115 Sreevidya                              14
+Trivandrum                     25-NOV-11
+
+
+SQL> update studt set studcity='Alappuzha' where studname='Gauri';
+
+1 row updated.
+
+SQL> select * from studt;
+
+    STUDID STUDNAME                          STUDAGE
+---------- ------------------------------ ----------
+STUDCITY                       DOB
+------------------------------ ---------
+       111 Anaswara                               15
+Kottayam                       10-JAN-10
+
+       112 Deexit                                 16
+Pathanamthitta                 16-JUL-09
+
+       113 Gauri                                  16
+Alappuzha                      02-MAR-09
+
+
+    STUDID STUDNAME                          STUDAGE
+---------- ------------------------------ ----------
+STUDCITY                       DOB
+------------------------------ ---------
+       114 Jithin                                 15
+Calicut                        05-OCT-10
+
+       115 Sreevidya                              14
+Trivandrum                     25-NOV-11
+
+
+SQL> alter table studt modify Studname varchar(15);
+
+Table altered.
+
+SQL> desc studt;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDID                                    NOT NULL NUMBER(10)
+ STUDNAME                                           VARCHAR2(15)
+ STUDAGE                                            NUMBER(2)
+ STUDCITY                                           VARCHAR2(30)
+ DOB                                                DATE
+
+SQL> alter table studt modify Studcity varchar(15);
+
+Table altered.
+
+SQL> desc studt;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDID                                    NOT NULL NUMBER(10)
+ STUDNAME                                           VARCHAR2(15)
+ STUDAGE                                            NUMBER(2)
+ STUDCITY                                           VARCHAR2(15)
+ DOB                                                DATE
+
+SQL> select * from studt;
+
+    STUDID STUDNAME           STUDAGE STUDCITY        DOB
+---------- --------------- ---------- --------------- ---------
+       111 Anaswara                15 Kottayam        10-JAN-10
+       112 Deexit                  16 Pathanamthitta  16-JUL-09
+       113 Gauri                   16 Alappuzha       02-MAR-09
+       114 Jithin                  15 Calicut         05-OCT-10
+       115 Sreevidya               14 Trivandrum      25-NOV-11
+
+SQL> alter table studt drop (studcity);
+
+Table altered.
+
+SQL> select * from studt;
+
+    STUDID STUDNAME           STUDAGE DOB
+---------- --------------- ---------- ---------
+       111 Anaswara                15 10-JAN-10
+       112 Deexit                  16 16-JUL-09
+       113 Gauri                   16 02-MAR-09
+       114 Jithin                  15 05-OCT-10
+       115 Sreevidya               14 25-NOV-11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
