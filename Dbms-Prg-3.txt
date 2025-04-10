@@ -1,0 +1,219 @@
+SQL> desc emply;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(10)
+ EMPNAME                                            VARCHAR2(20)
+ DESG                                               VARCHAR2(20)
+ DJOIN                                              DATE
+ SAL                                                NUMBER(15)
+
+SQL> select * from emply;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply order by ename;
+select * from emply order by ename
+                             *
+ERROR at line 1:
+ORA-00904: "ENAME": invalid identifier
+
+
+SQL> select * from emply order by empname;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+
+SQL> select * from emply order by desg;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply order by djoin;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1005 Madhav               Manager              25-OCT-20      30000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+
+SQL> select * from emply order by salary;
+select * from emply order by salary
+                             *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier
+
+
+SQL> select * from emply order by sal;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1005 Madhav               Manager              25-OCT-20      30000
+
+SQL> select * from emply order by empname desc;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1005 Madhav               Manager              25-OCT-20      30000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+
+SQL> select * from emply order by desg desc;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1005 Madhav               Manager              25-OCT-20      30000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1001 Anoop                Clerk                10-AUG-20      12000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+
+SQL> select * from emply order by sal desc;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+      1005 Madhav               Manager              25-OCT-20      30000
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+      1002 Sooraj               Accountant           12-FEB-21      14000
+      1001 Anoop                Clerk                10-AUG-20      12000
+
+SQL> select max(sal) from emply;
+
+  MAX(SAL)
+----------
+     30000
+
+SQL> select min(sal) from emply;
+
+  MIN(SAL)
+----------
+     12000
+
+SQL> select sum(sal) from emply;
+
+  SUM(SAL)
+----------
+    108000
+
+SQL> select avg(sal) from emply;
+
+  AVG(SAL)
+----------
+     21600
+
+SQL> select count(sal) from emply;
+
+COUNT(SAL)
+----------
+         5
+
+SQL> select count(empname) from emply;
+
+COUNT(EMPNAME)
+--------------
+             5
+
+SQL> select count(*) from emply;
+
+  COUNT(*)
+----------
+         5
+
+SQL> alter table studt rename column empno to empid;
+alter table studt rename column empno to empid
+                                *
+ERROR at line 1:
+ORA-00904: "EMPNO": invalid identifier
+
+
+SQL> desc emply;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(10)
+ EMPNAME                                            VARCHAR2(20)
+ DESG                                               VARCHAR2(20)
+ DJOIN                                              DATE
+ SAL                                                NUMBER(15)
+
+SQL> alter table studt rename column 'empno' to 'empid';
+alter table studt rename column 'empno' to 'empid'
+                                *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table emply add ecomm number(20);
+
+Table altered.
+
+SQL> alter table emply add ecomm number(20);
+alter table emply add ecomm number(20)
+                      *
+ERROR at line 1:
+ORA-01430: column being added already exists in table
+
+
+SQL> ALTER TABLE employees
+  2  ADD (
+  3    emp_phone VARCHAR2(15),
+  4    emp_address VARCHAR2(255)
+  5  );
+
+Table altered.
+
+SQL> select * from emply;
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+     ECOMM
+----------
+      1001 Anoop                Clerk                10-AUG-20      12000
+
+
+      1002 Sooraj               Accountant           12-FEB-21      14000
+
+
+      1003 Amit                 Asst. Manager        18-JUN-22      25000
+
+
+
+     EMPNO EMPNAME              DESG                 DJOIN            SAL
+---------- -------------------- -------------------- --------- ----------
+     ECOMM
+----------
+      1004 Deepika              Gen. Manager         22-JUL-21      27000
+
+
+      1005 Madhav               Manager              25-OCT-20      30000
+
+
+
+SQL>
+
+
+
+

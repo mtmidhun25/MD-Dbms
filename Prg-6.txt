@@ -1,0 +1,239 @@
+SQL> create table empl6(eid number(10)not null,ename varchar(20),hdate date,sal number(10),comm number(10),job varchar(15));
+
+Table created.
+
+SQL> dsec empl6;
+SP2-0042: unknown command "dsec empl6" - rest of line ignored.
+SQL> desc empl6;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                       NOT NULL NUMBER(10)
+ ENAME                                              VARCHAR2(20)
+ HDATE                                              DATE
+ SAL                                                NUMBER(10)
+ COMM                                               NUMBER(10)
+ JOB                                                VARCHAR2(15)
+
+SQL> insert into empl6 values(11,'Arjun','20-april-2021',8000,300,'Asst. Manager')
+  2  ;
+
+1 row created.
+
+SQL> insert into empl6 values(12,'Bejoy',10-may-2022',7000,200,'Asst. Clerk');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into empl6 values(12,'Bejoy','10-may-2022',7000,200,'Asst. Clerk');
+
+1 row created.
+
+SQL> insert into empl6 values(13,'Devjit','15-march-2021',8500,350,'Finance Ex.');
+
+1 row created.
+
+SQL> insert into empl6 values(14,'Geethu','23-june-2022',8500,300,'Ex. Manager');
+
+1 row created.
+
+SQL> insert into empl6 values(15,'Irfana','25-nov-2020',10000,450,'M. Director');
+
+1 row created.
+
+SQL> select job,max(sal) as highest
+  2  select job,max(sal) as highest_sal from empl6 group by job;
+select job,max(sal) as highest_sal from empl6 group by job
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select job max(sal) as highest_sal from empl6 group by job;
+select job max(sal) as highest_sal from empl6 group by job
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select job and max(salary) as highest_sal from empl6 group by job;
+select job and max(salary) as highest_sal from empl6 group by job
+           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select job,max(sal) as highest_sal from empl6 group by job;
+
+JOB             HIGHEST_SAL
+--------------- -----------
+Asst. Manager          8000
+Asst. Clerk            7000
+Finance Ex.            8500
+Ex. Manager            8500
+M. Director           10000
+
+SQL> select job,sum(sal) as total_sal from empl6 group by job;
+
+JOB              TOTAL_SAL
+--------------- ----------
+Asst. Manager         8000
+Asst. Clerk           7000
+Finance Ex.           8500
+Ex. Manager           8500
+M. Director          10000
+
+SQL> insert into empl6 values(16,'Imtiaz','2-feb-2021',7500,350,'Asst. Clerk');
+
+1 row created.
+
+SQL> insert into empl6 values(17,'Kelion','30-july-2022',8500,350,'Ex. Manager');
+
+1 row created.
+
+SQL> insert into empl6 values(18,'Mahsooda','13-january-2021',8500,300,'Finance Ex.');
+
+1 row created.
+
+SQL> select job,max(sal) as highest_sal from empl6 group by job;
+
+JOB             HIGHEST_SAL
+--------------- -----------
+Asst. Manager          8000
+Asst. Clerk            7500
+Finance Ex.            8500
+Ex. Manager            8500
+M. Director           10000
+
+SQL> select job,max(sal) as highest_sal from empl6 group by sal;
+select job,max(sal) as highest_sal from empl6 group by sal
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> select job,max(sal) as highest_sal from empl6 group by sal;
+select job,max(sal) as highest_sal from empl6 group by sal
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> select job,max(sal) as highest_sal from empl6 group by job;
+
+JOB             HIGHEST_SAL
+--------------- -----------
+Asst. Manager          8000
+Asst. Clerk            7500
+Finance Ex.            8500
+Ex. Manager            8500
+M. Director           10000
+
+SQL> select job,sum(sal) as total_sal from empl6 group by job;
+
+JOB              TOTAL_SAL
+--------------- ----------
+Asst. Manager         8000
+Asst. Clerk          14500
+Finance Ex.          17000
+Ex. Manager          17000
+M. Director          10000
+
+SQL> select job,min(sal) as minimum_sal from empl6 group by job;
+
+JOB             MINIMUM_SAL
+--------------- -----------
+Asst. Manager          8000
+Asst. Clerk            7000
+Finance Ex.            8500
+Ex. Manager            8500
+M. Director           10000
+
+SQL> select * from table empl6;
+select * from table empl6
+                    *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> select * from empl6;
+
+       EID ENAME                HDATE            SAL       COMM JOB
+---------- -------------------- --------- ---------- ---------- ---------------
+        11 Arjun                20-APR-21       8000        300 Asst. Manager
+        12 Bejoy                10-MAY-22       7000        200 Asst. Clerk
+        13 Devjit               15-MAR-21       8500        350 Finance Ex.
+        14 Geethu               23-JUN-22       8500        300 Ex. Manager
+        15 Irfana               25-NOV-20      10000        450 M. Director
+        16 Imtiaz               02-FEB-21       7500        350 Asst. Clerk
+        17 Kelion               30-JUL-22       8500        350 Ex. Manager
+        18 Mahsooda             13-JAN-21       8500        300 Finance Ex.
+
+8 rows selected.
+
+SQL> select job,avg(sal) as average_sal from empl6 group by job;
+
+JOB             AVERAGE_SAL
+--------------- -----------
+Asst. Manager          8000
+Asst. Clerk            7250
+Finance Ex.            8500
+Ex. Manager            8500
+M. Director           10000
+
+SQL> count(*) as empl_count from empl6 group by job;
+SP2-0734: unknown command beginning "count(*) a..." - rest of line ignored.
+SQL> select job,avg(sal) as average_sal, count(*) as empl_count from empl6 group by job;
+
+JOB             AVERAGE_SAL EMPL_COUNT
+--------------- ----------- ----------
+Asst. Manager          8000          1
+Asst. Clerk            7250          2
+Finance Ex.            8500          2
+Ex. Manager            8500          2
+M. Director           10000          1
+
+SQL> select job,max(sal) as max_sal from empl6 group by job having max(sal)>=8000;
+
+JOB                MAX_SAL
+--------------- ----------
+Asst. Manager         8000
+Finance Ex.           8500
+Ex. Manager           8500
+M. Director          10000
+
+SQL> select job,max(sal) as max_sal from empl6 group by job having max(sal)<8000;
+
+JOB                MAX_SAL
+--------------- ----------
+Asst. Clerk           7500
+
+SQL> select job,min(sal) as min_sal from empl6 group by job having min(sal)<8000;
+
+JOB                MIN_SAL
+--------------- ----------
+Asst. Clerk           7000
+
+SQL> select job,avg(sal) as avg_sal from empl6 group by job having max(sal)<8000;
+
+JOB                AVG_SAL
+--------------- ----------
+Asst. Clerk           7250
+
+SQL> select job,avg(sal) as avg_sal from empl6 group by job having max(sal)>8000;
+
+JOB                AVG_SAL
+--------------- ----------
+Finance Ex.           8500
+Ex. Manager           8500
+M. Director          10000
+
+SQL> select job,sum(sal) as total_sal from empl6 group by job having sum(sal)>8000 order by total_sal desc;
+
+JOB              TOTAL_SAL
+--------------- ----------
+Finance Ex.          17000
+Ex. Manager          17000
+Asst. Clerk          14500
+M. Director          10000
+
+SQL>

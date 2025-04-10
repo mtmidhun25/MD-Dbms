@@ -1,0 +1,291 @@
+desc empl1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                       NOT NULL NUMBER(5)
+ ENAME                                              VARCHAR2(15)
+ DOB                                                DATE
+ ADDRESS                                            VARCHAR2(20)
+ MOB                                                NUMBER(10)
+ SALARY                                             NUMBER(10)
+
+SQL> desc dept1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DPTNO                                     NOT NULL NUMBER(5)
+ DNAME                                              VARCHAR2(15)
+ LOCATION                                           VARCHAR2(15)
+ EID                                                NUMBER(5)
+
+SQL> insert into empl1 values(1,'Amit','12-november-2001','Jaipur',9897654563,34000);
+
+1 row created.
+
+SQL> insert into empl1 values(2,'Bipin','18-march-2000','Mumbai',9678535564,37000);
+
+1 row created.
+
+SQL> insert into empl1 values(3,'Felix','2-july-2001','Odisha',9435678432,32000);
+
+1 row created.
+
+SQL> insert into empl1 values(4,'Hafiz'28-july-2001','Punjab',9745338296,38000);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into empl1 values(4,'Hafis','28-july-2001','Punjab',9745338296,38000);
+
+1 row created.
+
+SQL> insert into empl1 values(5,'Lenin','4-january-2002','Itarzi',9495664378,31000);
+
+1 row created.
+
+SQL> insert into empl1 values(6,'Priti','16-august-2001','Agra',9962314256,39000);
+
+1 row created.
+
+SQL> select * from empl1;
+
+       EID ENAME           DOB       ADDRESS                     MOB     SALARY
+---------- --------------- --------- -------------------- ---------- ----------
+         1 Amit            12-NOV-01 Jaipur               9897654563      34000
+         2 Bipin           18-MAR-00 Mumbai               9678535564      37000
+         3 Felix           02-JUL-01 Odisha               9435678432      32000
+         4 Hafis           28-JUL-01 Punjab               9745338296      38000
+         5 Lenin           04-JAN-02 Itarzi               9495664378      31000
+         6 Priti           16-AUG-01 Agra                 9962314256      39000
+
+6 rows selected.
+
+SQL> insert into dept1 values(1011,'HR','Mumnbai',1);
+
+1 row created.
+
+SQL> insert into dept1 values(1012,'Finance','UP',2);
+
+1 row created.
+
+SQL> insert into dept1 values(1013,'Operations','Maharashtra',3);
+
+1 row created.
+
+SQL> insert into dept1 values(1014,'Administration','Haryana',4);
+
+1 row created.
+
+SQL> insert into dept1 values(1015,'Sales','Delhi',5);
+
+1 row created.
+
+SQL> insert into dept1 values(1016,'IT','Kolkata',6);
+
+1 row created.
+
+SQL> select * from empl1;
+
+       EID ENAME           DOB       ADDRESS                     MOB     SALARY
+---------- --------------- --------- -------------------- ---------- ----------
+         1 Amit            12-NOV-01 Jaipur               9897654563      34000
+         2 Bipin           18-MAR-00 Mumbai               9678535564      37000
+         3 Felix           02-JUL-01 Odisha               9435678432      32000
+         4 Hafis           28-JUL-01 Punjab               9745338296      38000
+         5 Lenin           04-JAN-02 Itarzi               9495664378      31000
+         6 Priti           16-AUG-01 Agra                 9962314256      39000
+
+6 rows selected.
+
+SQL> select * from dept1;
+
+     DPTNO DNAME           LOCATION               EID
+---------- --------------- --------------- ----------
+      1011 HR              Mumnbai                  1
+      1012 Finance         UP                       2
+      1013 Operations      Maharashtra              3
+      1014 Administration  Haryana                  4
+      1015 Sales           Delhi                    5
+      1016 IT              Kolkata                  6
+
+6 rows selected.
+
+SQL> update dept1 modify location='Mumbai' where dptno='1011';
+update dept1 modify location='Mumbai' where dptno='1011'
+             *
+ERROR at line 1:
+ORA-00971: missing SET keyword
+
+
+SQL> update dept1 set location='Mumbai' where dptno='1011';
+
+1 row updated.
+
+SQL> select * from dept1;
+
+     DPTNO DNAME           LOCATION               EID
+---------- --------------- --------------- ----------
+      1011 HR              Mumbai                   1
+      1012 Finance         UP                       2
+      1013 Operations      Maharashtra              3
+      1014 Administration  Haryana                  4
+      1015 Sales           Delhi                    5
+      1016 IT              Kolkata                  6
+
+6 rows selected.
+
+SQL> insert into empl1 values(1,'Amit','12-november-2001','Jaipur',9897654563,34000);
+
+SQL> select * from empl1;
+
+       EID ENAME           DOB       ADDRESS                     MOB     SALARY
+---------- --------------- --------- -------------------- ---------- ----------
+         1 Amit            12-NOV-01 Jaipur               9897654563      34000
+         2 Bipin           18-MAR-00 Mumbai               9678535564      37000
+         3 Felix           02-JUL-01 Odisha               9435678432      32000
+         4 Hafis           28-JUL-01 Punjab               9745338296      38000
+         5 Lenin           04-JAN-02 Itarzi               9495664378      31000
+         6 Priti           16-AUG-01 Agra                 9962314256      39000
+
+6 rows selected.
+
+SQL> select * from dept1;
+
+     DPTNO DNAME           LOCATION               EID
+---------- --------------- --------------- ----------
+      1011 HR              Mumbai                   1
+      1012 Finance         UP                       2
+      1013 Operations      Maharashtra              3
+      1014 Administration  Haryana                  4
+      1015 Sales           Delhi                    5
+      1016 IT              Kolkata                  6
+
+6 rows selected.
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid;
+
+ENAME                  EID
+--------------- ----------
+Amit                     1
+Bipin                    2
+Felix                    3
+Hafis                    4
+Lenin                    5
+Priti                    6
+
+6 rows selected.
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid;
+
+ENAME                  EID
+--------------- ----------
+Amit                     1
+Bipin                    2
+Felix                    3
+Hafis                    4
+Lenin                    5
+Priti                    6
+
+6 rows selected.
+
+SQL> select e.ename,d.eid,d.dname,d.dptno from dept1 d join empl1 e on d.eid=e.eid;
+
+ENAME                  EID DNAME                DPTNO
+--------------- ---------- --------------- ----------
+Amit                     1 HR                    1011
+Bipin                    2 Finance               1012
+Felix                    3 Operations            1013
+Hafis                    4 Administration        1014
+Lenin                    5 Sales                 1015
+Priti                    6 IT                    1016
+
+6 rows selected.
+
+SQL> select d.eid,e.ename,d.dptno,d.dname from dept1 d join empl1 e on d.eid=e.eid;
+
+       EID ENAME                DPTNO DNAME
+---------- --------------- ---------- ---------------
+         1 Amit                  1011 HR
+         2 Bipin                 1012 Finance
+         3 Felix                 1013 Operations
+         4 Hafis                 1014 Administration
+         5 Lenin                 1015 Sales
+         6 Priti                 1016 IT
+
+6 rows selected.
+
+SQL> alter table empl1 add desg varchar(20);
+
+Table altered.
+
+SQL> alter table dept1 drop column location;
+
+Table altered.
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where dptno=1002;
+
+no rows selected
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where dptno=1012;
+
+ENAME                  EID
+--------------- ----------
+Bipin                    2
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where dptno=1012,1014,1016;
+select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where dptno=1012,1014,1016
+                                                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where dptno=10121014,1016
+  2
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where
+  2  dptno=1012
+  3  1014
+  4  1016;
+1014
+*
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select e.ename,d.eid from dept1 d join empl1 e on d.eid=e.eid where
+  2  dptno=1012
+  3  dptno=1014
+  4  dptno=1016;
+dptno=1014
+*
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT e.ename, d.eid
+  2  FROM dept1 d
+  3  JOIN empl1 e
+  4  ON d.eid = e.eid
+  5  WHERE d.dptno IN (1012, 1014, 1016);
+
+ENAME                  EID
+--------------- ----------
+Bipin                    2
+Hafis                    4
+Priti                    6
+
+SQL>SQL> select e.ename,e.eid,e.desg,e.salary,d.dptno from empl1 e join dept1 d on e.eid=d.eid order by e.salary desc;
+
+ENAME                  EID DESG                     SALARY      DPTNO
+--------------- ---------- -------------------- ---------- ----------
+Priti                    6                           39000       1016
+Hafis                    4                           38000       1014
+Bipin                    2                           37000       1012
+Amit                     1                           34000       1011
+Felix                    3                           32000       1013
+Lenin                    5                           31000       1015
+
+6 rows selected.
+
+SQL> select ename,mob from empl1 where ename like ('A%');
+
+ENAME                  MOB
+--------------- ----------
+Amit            9897654563

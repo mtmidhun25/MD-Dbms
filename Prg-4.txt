@@ -1,0 +1,51 @@
+SQL> create table cst(custid number(10)not null,address varchar(20),city varchar(15),phono number(10));
+
+Table created.
+
+SQL> insert into cst values(1001,'Green villa','Kochi',9897965567);
+
+1 row created.
+
+SQL> insert into cst values(1002,'Sopanam','Trivandrum',9974658595);
+
+1 row created.
+
+SQL> insert into cst values(1003,'Ali Manzil','Calicut',9678545943);
+
+1 row created.
+
+SQL> insert into cst values(1004,'Hridayam','Kollam',9572751594);
+
+1 row created.
+
+SQL> insert into cst values(1005,'Saarang','Alappey',9861375929);
+
+1 row created.
+
+SQL> select * from cst;
+
+    CUSTID ADDRESS              CITY                 PHONO
+---------- -------------------- --------------- ----------
+      1001 Green villa          Kochi           9897965567
+      1002 Sopanam              Trivandrum      9974658595
+      1003 Ali Manzil           Calicut         9678545943
+      1004 Hridayam             Kollam          9572751594
+      1005 Saarang              Alappey         9861375929
+
+SQL> update cst set city='Kozhikode' where city='Calicut';
+
+1 row updated.
+
+SQL> update cst set phono='9778397762' where custid='1002';
+
+1 row updated.
+
+SQL> select * from cst;
+
+    CUSTID ADDRESS              CITY                 PHONO
+---------- -------------------- --------------- ----------
+      1001 Green villa          Kochi           9897965567
+      1002 Sopanam              Trivandrum      9778397762
+      1003 Ali Manzil           Kozhikode       9678545943
+      1004 Hridayam             Kollam          9572751594
+      1005 Saarang              Alappey         9861375929
